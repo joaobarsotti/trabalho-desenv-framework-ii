@@ -30,7 +30,7 @@ jobs:
                 context: .
                 file: ./Dockerfile
                 push: true
-                tags: joaobarsotti/trabalho-desenv-framework-ii:latest
+                tags: joaopedrobarsotti/trabalho-desenv-framework-ii:latest
             
             - name: Azure Deploy
               uses: Azure/webapps-deploy@v3.0.1
