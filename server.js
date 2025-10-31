@@ -16,7 +16,7 @@ const sequelize = db.sequelize;
 const { User, Equipment, Maintenance } = db;
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(cors()); 
 app.use(express.json());
@@ -65,5 +65,6 @@ async function startServer() {
         console.error('Erro ao iniciar o servidor ou conectar ao BD:', error);
     }
 }
+
 
 startServer();
