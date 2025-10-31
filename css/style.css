@@ -1,0 +1,193 @@
+html, body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4; 
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 15px 0; 
+    position: relative; 
+}
+
+header p {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #cfcfcf;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    background: #444; 
+    padding: 10px 0; 
+    gap: 15px; 
+    align-items: center; 
+    height: 40px; 
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 0 10px; 
+    font-weight: normal; 
+}
+
+#protectedLinks {
+    display: flex;
+    align-items: center; 
+    height: 100%;
+}
+
+#protectedLinks a {
+    padding: 8px 10px; 
+}
+
+.user-info {
+    position: absolute;
+    top: 5px; 
+    right: 20px; 
+    background: #f8f9fa; 
+    padding: 3px 8px; 
+    border-radius: 5px;
+    color: #333; 
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-info .logout-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 3px 8px; 
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.container {
+    flex: 1;
+    width: 80%;
+    max-width: 1000px; 
+    margin: 20px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.equipment-container, .maintenance-container, .login-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    background: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #007BFF;
+    color: white;
+}
+
+.actions button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.btn-edit {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+.message {
+    padding: 10px;
+    margin: 10px auto;
+    border-radius: 5px;
+    display: none;
+    max-width: 80%;
+}
+
+.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-badge {
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+.status-agendada { background-color: #ffc107; color: #000; }
+.status-em-andamento { background-color: #17a2b8; color: white; }
+.status-concluida { background-color: #28a745; color: white; }
+.status-cancelada { background-color: #dc3545; color: white; }
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+}
