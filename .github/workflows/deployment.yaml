@@ -33,5 +33,5 @@ jobs:
               uses: Azure/webapps-deploy@v3.0.1
               with:
                 app-name: trabalho-api
-                publish-profile: ${{ secrets.PUBLISH_PROFILE}}
+                publish-profile: ${{ secrets.PUBLISH_PROFILE }}
                 image: joaobarsotti/trabalho-desenv-framework-ii:latest
