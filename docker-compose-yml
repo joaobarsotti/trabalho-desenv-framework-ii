@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  api:
+    build: . 
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: sqlite:database.sqlite 
+      JWT_SECRET: sua_chave_super_secreta_e_forte 
+    volumes:
+      - ./database.sqlite:/usr/src/app/database.sqlite 
+
+  db:
+    image: alpine/git
+    volumes:
+      - sqlite_data:/var/lib/sqlite 
+
+volumes:
+  sqlite_data:

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculdade Tech</title>
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/inicio.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Faculdade Tech</h1>
+        <p>Construindo o Futuro com Tecnologia</p>
+    </header>
+    <div class="user-info" id="userInfo">
+        <span id="userName"></span>
+        <button class="logout-btn" onclick="logout()">Sair</button>
+    </div>
+    <nav id="mainNav"> 
+        <a href="inicio.html">Início</a>
+        <a href="cursos.html">Cursos</a>
+        <a href="login.html" id="loginLink">Login</a>
+        <span id="protectedLinks" style="display:none;"> 
+            <a href="equipamentos.html">Equipamentos</a>
+            <a href="manutencoes.html">Manutenções</a>
+            <a href="usuarios.html">Usuários</a>
+        </span>
+    </nav>
+    <main>
+        <section>
+            <h2>Bem-vindo à Faculdade Tech</h2>
+            <p>Explore nossos cursos e invista no seu futuro! Oferecemos formações voltadas para o mercado de tecnologia, com professores experientes e conteúdo atualizado.</p>
+        </section>
+
+        <section>
+            <h2>Sobre Nós</h2>
+            <p>A Faculdade Tech nasceu com o propósito de democratizar o ensino tecnológico no Brasil. Nossa metodologia é prática, moderna e voltada para o aprendizado real que prepara o aluno para o mercado de trabalho.</p>
+        </section>
+
+        <section>
+            <h2>Cursos em Destaque</h2>
+            <div class="cursos">
+                <div class="curso">
+                    <h3>Desenvolvimento Web</h3>
+                    <p>Aprenda HTML, CSS, JavaScript e frameworks modernos para construir sites e aplicações incríveis.</p>
+                </div>
+                <div class="curso">
+                    <h3>Ciência de Dados</h3>
+                    <p>Descubra o poder dos dados com Python, SQL e ferramentas de análise e machine learning.</p>
+                </div>
+                <div class="curso">
+                    <h3>Redes de Computadores</h3>
+                    <p>Entenda a infraestrutura que conecta o mundo e prepare-se para certificações profissionais.</p>
+                </div>
+                <div class="curso">
+                    <h3>Segurança da Informação</h3>
+                    <p>Aprenda a proteger sistemas e dados contra ameaças cibernéticas.</p>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2>O que nossos alunos dizem</h2>
+            <blockquote>"A Faculdade Tech me ajudou a entrar no mercado de TI com confiança e segurança!"</blockquote>
+            <blockquote>"Os cursos são práticos, os professores são excelentes e o suporte é incrível!"</blockquote>
+        </section>
+        <div class="cta">
+            <h2>Pronto para começar?</h2>
+            <a href="#">Inscreva-se agora</a>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Faculdade Tech - Todos os direitos reservados.</p>
+    </footer>
+    <script src="backend/auth.manager.js"></script>
+    <script src="backend/nav_manager.js"></script>
+</body>
+</html>

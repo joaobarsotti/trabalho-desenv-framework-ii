@@ -1,0 +1,276 @@
+openapi: 3.0.0
+info:
+  title: API de Gestão de Equipamentos - Faculdade Tech
+  version: 1.0.0
+  description: API CRUD para o gerenciamento de equipamentos e manutenções da Faculdade Tech, incluindo autenticação JWT.
+servers:
+  - url: http://localhost:3000/api
+    description: Servidor de Desenvolvimento Local
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Equipment:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Computador Lab X
+        category:
+          type: string
+          example: Informática
+        serialNumber:
+          type: strings
+          example: SN-DELL-550
+        purchaseDate:
+          type: date
+          example: 30-11-2025
+        value:
+         type: string
+         example: 500
+
+    Maintenance:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+          description: ID gerado pelo banco de dados.
+        equipmentId:
+          type: integer
+          description: ID do equipamento relacionado (chave estrangeira).
+          example: 1
+        type:
+          type: string
+          enum: [preventiva, corretiva, preditiva]
+          example: preventiva
+        description:
+          type: string
+          example: Limpeza.
+        scheduledDate: 
+          type: date
+          example: 25-12-2025
+    
+paths:
+  /auth/login:
+    post:
+      tags:
+        - Autenticação
+      summary: Realiza o login e retorna um token JWT
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: admin@faculdadetech.com
+                password:
+                  type: string
+                  example: senha123
+      responses:
+        '200':
+          description: Login bem-sucedido. Retorna o token.
+        '401':
+          description: Credenciais inválidas.
+
+  /equipments:
+    get:
+      tags:
+        - Equipamentos
+      summary: Lista todos os equipamentos
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Lista de equipamentos retornada com sucesso.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Equipment'
+        '401':
+          description: Não autorizado (token ausente ou inválido).
+    post:
+      tags:
+        - Equipamentos
+      summary: Cadastra um novo equipamento
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Equipment'
+      responses:
+        '201':
+          description: Equipamento criado com sucesso.
+        '400':
+          description: Dados inválidos.
+  /equipments/{id}:
+    get:
+      tags:
+        - Equipamentos
+      summary: Obtém um equipamento pelo ID
+      security:
+        - bearerAuth: [] # Rota protegida por JWT
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID do equipamento a ser exibido
+      responses:
+        '200':
+          description: Detalhes do equipamento retornados com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Equipment' # Referencia o schema de Equipamento
+        '404':
+          description: Equipamento não encontrado.
+        '401':
+          description: Não autorizado (token ausente ou inválido).
+    put:
+      tags:
+        - Equipamentos
+      summary: Atualiza um equipamento existente pelo ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID do equipamento a ser atualizado
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Equipment'
+      responses:
+        '200':
+          description: Equipamento atualizado com sucesso.
+        '404':
+          description: Equipamento não encontrado.      
+    delete: 
+      tags:
+        - Equipamentos
+      summary: Exclui um equipamento pelo ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID do equipamento a ser excluído
+      responses:
+        '204':
+          description: Equipamento excluído com sucesso.
+        '404':
+          description: Equipamento não encontrado.
+    
+  /maintenances:
+    get:
+      tags:
+        - Manutenções
+      summary: Lista todas as manutenções registradas
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Lista de manutenções retornada com sucesso.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Maintenance'
+        '401':
+          description: Não autorizado.
+          
+    post:
+      tags:
+        - Manutenções
+      summary: Cadastra uma nova manutenção
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Maintenance'
+      responses:
+        '201':
+          description: Manutenção criada com sucesso.
+        '400':
+          description: Dados inválidos (ex: campo obrigatório ausente).
+
+  /maintenances/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: ID da manutenção.
+    
+    get:
+      tags:
+        - Manutenções
+      summary: Obtém uma manutenção pelo ID
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Detalhes da manutenção.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Maintenance'
+        '404':
+          description: Manutenção não encontrada.
+
+    put:
+      tags:
+        - Manutenções
+      summary: Atualiza uma manutenção existente pelo ID
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Maintenance'
+      responses:
+        '200':
+          description: Manutenção atualizada com sucesso.
+        '404':
+          description: Manutenção não encontrada.
+
+    delete:
+      tags:
+        - Manutenções
+      summary: Exclui uma manutenção pelo ID
+      security:
+        - bearerAuth: []
+      responses:
+        '204':
+          description: Manutenção excluída com sucesso.
+        '404':
+          description: Manutenção não encontrada.
