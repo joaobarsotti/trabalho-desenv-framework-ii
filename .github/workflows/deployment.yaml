@@ -32,6 +32,6 @@ jobs:
             - name: Azure Deploy
               uses: Azure/webapps-deploy@v3.0.1
               with:
-                app-name: trabalho-desenv-framework-ii
+                app-name: trabalho-api
                 publish-profile: ${{ secrets.PUBLISH_PROFILE}}
                 image: joaobarsotti/trabalho-desenv-framework-ii:latest
