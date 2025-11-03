@@ -1,12 +1,11 @@
 version: '3.8'
 
 services:
-  # 1. SERVIÇO DO BANCO DE DADOS (PostgreSQL)
   db_postgres:
     image: postgres:15-alpine 
     container_name: faculdade_tech_db
     restart: always
-    environment: # <-- MUDANÇA AQUI: Usando ENVIRONMENT
+    environment:
       POSTGRES_USER: user_faculdade_demo
       POSTGRES_PASSWORD: sua_senha_demo_aqui
       POSTGRES_DB: faculdade_tech_demo
@@ -15,23 +14,19 @@ services:
     ports:
       - "5432:5432" 
 
-  # 2. SERVIÇO DA API (Node.js/Express)
   app:
     build: .
     container_name: faculdade_tech_api
     restart: always
-    environment: # <-- MUDANÇA AQUI: Usando ENVIRONMENT para injetar TODAS as vars
-      # Variáveis da API
+    environment: 
       NODE_ENV: development
       PORT: 3000
       JWT_SECRET: "chave_secreta_para_apresentacao"
-      # Variáveis de Conexão com o DB (devem bater com o serviço 'db_postgres')
-      DB_HOST: db_postgres # Nome do serviço no Docker Compose
+      DB_HOST: db_postgres 
       DB_PORT: 5432
       DB_NAME: faculdade_tech_demo
       DB_USER: user_faculdade_demo
       DB_PASSWORD: sua_senha_demo_aqui
-      # As credenciais devem ser as mesmas do serviço 'db_postgres' acima!
     ports:
       - "8000:3000" 
     depends_on:
@@ -41,6 +36,5 @@ services:
       - /app/node_modules 
     command: npm start
     
-
 volumes:
   postgres_data:

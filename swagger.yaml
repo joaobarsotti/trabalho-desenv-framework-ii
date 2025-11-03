@@ -121,7 +121,7 @@ paths:
         - Equipamentos
       summary: Obtém um equipamento pelo ID
       security:
-        - bearerAuth: [] # Rota protegida por JWT
+        - bearerAuth: [] 
       parameters:
         - name: id
           in: path
@@ -135,7 +135,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Equipment' # Referencia o schema de Equipamento
+                $ref: '#/components/schemas/Equipment'
         '404':
           description: Equipamento não encontrado.
         '401':
