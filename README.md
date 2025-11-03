@@ -55,11 +55,15 @@ npm install
 ```
 docker-compose up -d --build
 ```
-5- Acessar o Front-end da API
+5- Acessar o Front-end da API  
 A API estará acessível em: 
 ```
 http://localhost:8000/inicio.html
 ```
+Para primeiro acesso:  
+- email: admin@faculdadetech.com  
+- senha: senha123  
+
 7- Acessar Documentação da API (Swagger)
 A documentação interativa da API está disponível em:
 ```
