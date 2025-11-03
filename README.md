@@ -44,7 +44,7 @@ Certifique-se de ter o Node.js, npm, Git e Docker (com Docker Compose) instalado
 
 1- Clone o repositório:
 ```
-git clone [URL_DO_SEU_REPOSITORIO] cd [NOME_DO_PROJETO] Instale as Dependências:
+git clone [URL_DO_SEU_REPOSITORIO] cd [NOME_DO_PROJETO]
 ```
 
 2- Instale as Dependências:
