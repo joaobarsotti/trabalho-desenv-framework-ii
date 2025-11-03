@@ -39,7 +39,8 @@ Dockerfile: Para conteinerização da API.
 
 ## Instruções de Execução Local (Com Docker Compose)
 
-Pré-requisitos Locais Certifique-se de ter o Node.js, npm, Git e Docker (com Docker Compose) instalados.
+Pré-requisitos Locais  
+Certifique-se de ter o Node.js, npm, Git e Docker (com Docker Compose) instalados.
 
 1- Clone o repositório:
 ```
@@ -64,7 +65,7 @@ Para primeiro acesso:
 - email: admin@faculdadetech.com  
 - senha: senha123  
 
-7- Acessar Documentação da API (Swagger)
+7- Acessar Documentação da API (Swagger)  
 A documentação interativa da API está disponível em:
 ```
 http://localhost:8000/api-docs
