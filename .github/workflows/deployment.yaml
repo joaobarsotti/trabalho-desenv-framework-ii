@@ -4,6 +4,9 @@ on:
     pull_request:
         branches:
             - main
+    push:
+        branches:
+            - main
 jobs:
     deploy:
         name: deploy
@@ -16,10 +19,10 @@ jobs:
                 fetch-depth: 0
 
             - name: Docker login
-              uses: docker/login-action@v3.4.0
+              uses: docker/login-action@v3
               with:
                 username: ${{ secrets.DOCKER_USER }}
-                password: ${{secrets.DOCKER_PASSWORD }}
+                password: ${{ secrets.DOCKER_PASSWORD }}
 
             - name: Docker Build and Push
               uses: docker/build-push-action@v6.16.0
@@ -27,11 +30,11 @@ jobs:
                 context: .
                 file: ./Dockerfile
                 push: true
-                tags: joaobarsotti/trabalho-desenv-framework-ii:latest
+                tags: joaopedrobarsotti/trabalho-desenv-framework-ii:latest
             
             - name: Azure Deploy
               uses: Azure/webapps-deploy@v3.0.1
               with:
                 app-name: trabalho-api
-                publish-profile: ${{ secrets.PUBLISH_PROFILE}}
+                publish-profile: ${{ secrets.PUBLISH_PROFILE }}
                 image: joaobarsotti/trabalho-desenv-framework-ii:latest

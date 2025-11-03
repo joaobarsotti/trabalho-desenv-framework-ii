@@ -18,7 +18,11 @@ const sequelize = db.sequelize;
 const { User, Equipment, Maintenance } = db;
 
 const app = express();
+<<<<<<< HEAD
 const PORT = 3000; // <<< CORRETO: A porta interna do container
+=======
+const PORT = process.env.PORT || 8080;
+>>>>>>> aa722056e48d4d339b52576f44647182c4d1bd84
 
 app.use(cors()); 
 app.use(express.json());
@@ -72,4 +76,10 @@ async function startServer() {
     }
 }
 
+<<<<<<< HEAD
 startServer();
+=======
+
+startServer();
+
+>>>>>>> aa722056e48d4d339b52576f44647182c4d1bd84
