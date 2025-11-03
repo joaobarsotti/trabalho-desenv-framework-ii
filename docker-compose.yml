@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  # 1. SERVIÇO DO BANCO DE DADOS (PostgreSQL)
+  db_postgres:
+    image: postgres:15-alpine 
+    container_name: faculdade_tech_db
+    restart: always
+    # Carrega variáveis de ambiente (POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB)
+    env_file:
+      - .env
+    volumes:
+      # Volume para persistir os dados do banco
+      - postgres_data:/var/lib/postgresql/data 
+    ports:
+      # Porta opcional para acesso externo (ex: PgAdmin)
+      - "5432:5432" 
+
+  # 2. SERVIÇO DA API (Node.js/Express)
+  app:
+    build: . # Constrói a imagem a partir do Dockerfile na pasta atual
+    container_name: faculdade_tech_api
+    restart: always
+    env_file:
+      - .env
+    ports:
+      # Mapeia a porta 8000 da sua máquina para a porta 3000 do container
+      - "8000:3000" 
+    depends_on:
+      - db_postgres # Garante que o DB inicie antes da API
+    volumes:
+      # Mapeamento do código para desenvolvimento (hot-reload)
+      - .:/app 
+      # Volume anônimo para evitar que o node_modules local sobrescreva o do container
+      - /app/node_modules 
+    # Use o comando 'npm run dev' se você tiver um script configurado para nodemon
+    # Se não tiver, use 'node server.js' como no Dockerfile
+    command: npm start
+    
+
+volumes:
+  postgres_data:

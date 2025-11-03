@@ -15,6 +15,8 @@ Deploy/Infraestrutura: Docker, GitHub Actions (CI/CD), Azure (ou Render)
 
 Front-end: HTML, CSS (Padronizado), JavaScript
 
+Infraestrutura/Local: Docker, Docker Compose para orquestração local (API + Banco de Dados).
+
 ## Estrutura do Projeto
 
 A aplicação segue uma arquitetura modularizada (MVC simplificado):
@@ -35,41 +37,35 @@ swagger.yaml: Documentação da API.
 
 Dockerfile: Para conteinerização da API.
 
-## Instruções de Deploy
+## Instruções de Execução Local (Com Docker Compose)
 
-1. Pré-requisitos Locais Certifique-se de ter o Node.js, npm, Docker e o Git instalados.
+Pré-requisitos Locais Certifique-se de ter o Node.js, npm, Git e Docker (com Docker Compose) instalados.
 
-2. Instalação e Execução Local Para rodar a aplicação localmente (usando SQLite):
-
-Clone o repositório:
+1- Clone o repositório:
 ```
 git clone [URL_DO_SEU_REPOSITORIO] cd [NOME_DO_PROJETO] Instale as Dependências:
 ```
 
-Instale as Dependências:
+2- Instale as Dependências:
 ```
 npm install
-
 ```
 
-Inicialize o Servidor (API):
+3- Inicializar o Ambiente (API e Banco de Dados)
 ```
-node server.js
+docker-compose up -d --build
+```
+5- Acessar a API
+A API estará acessível através do host na porta mapeada 
+```
+http://localhost:8000
 ```
 
-O terminal deverá exibir mensagens indicando que o servidor está rodando e conectado ao banco de dados, geralmente na porta 3000. O banco de dados SQLite (database.sqlite) será criado automaticamente na raiz do projeto, se não existir.
+6- Acessar o Front-end
+Abra seus arquivos HTML estáticos (ex: inicio.html ou usuarios.html) diretamente no seu navegador
 
-Acesse o Front-end: Abra seus arquivos HTML (ex: inicio.html ou login.html) diretamente no navegador.
-
-3. Configuração de Produção (Deploy no Render/Azure) Para o deploy em produção, é necessário migrar o banco de dados e configurar o CI/CD.
-  A. Backend (API Node.js com Docker) Migrar para PostgreSQL: Atualize /models/index.js para usar PostgreSQL e configure seu serviço de BD no Render (ou Azure Database).
-    Configurar o Dockerfile: O seu Dockerfile já está configurado para usar o ambiente do contêiner.
-    Configurar Secrets: No repositório do GitHub, configure os secrets necessários (ex: RENDER_DEPLOY_HOOK_URL ou as chaves do Azure).
-
-  B. Frontend (Arquivos Estáticos) Hospedagem: Publique seus arquivos estáticos (.html, /css, /js) em um serviço como GitHub Pages ou Azure Static Web Apps.
-    Atualizar API URL: Modifique a variável API_URL em seus scripts JS (equipamentos.js, manutencoes.js, etc.) para apontar para o domínio final da sua API hospedada no Render/Azure.
-
-4. Continuous Deployment (Via GitHub Actions) O deploy é automatizado através de arquivos YAML localizados em .github/workflows/.
-  API: Use o workflow deploy-render.yml (ou o correspondente ao Azure) para construir o Docker e implantar no serviço Web.
-
-  Frontend: Use o workflow específico para sites estáticos (como o do GitHub Pages ou Azure Static Web Apps) para publicar os arquivos HTML/CSS/JS.
+7- Acessar Documentação da API (Swagger)
+A documentação interativa da API está disponível em:
+```
+http://localhost:8000/api-docs
+```

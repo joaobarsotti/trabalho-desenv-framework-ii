@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   description: API CRUD para o gerenciamento de equipamentos e manutenções da Faculdade Tech, incluindo autenticação JWT.
 servers:
-  - url: http://localhost:3000/api
+  - url: http://localhost:8000/api
     description: Servidor de Desenvolvimento Local
 
 components:

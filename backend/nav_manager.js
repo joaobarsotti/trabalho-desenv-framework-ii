@@ -1,4 +1,3 @@
-// backend/nav_manager.js
 document.addEventListener('DOMContentLoaded', () => {
     const token = sessionStorage.getItem('token'); 
     const protectedLinksContainer = document.getElementById('protectedLinks');
