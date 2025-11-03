@@ -55,15 +55,11 @@ npm install
 ```
 docker-compose up -d --build
 ```
-5- Acessar a API
-A API estará acessível através do host na porta mapeada 
+5- Acessar o Front-end da API
+A API estará acessível em: 
 ```
-http://localhost:8000
+http://localhost:8000/inicio.html
 ```
-
-6- Acessar o Front-end
-Abra seus arquivos HTML estáticos (ex: inicio.html ou usuarios.html) diretamente no seu navegador
-
 7- Acessar Documentação da API (Swagger)
 A documentação interativa da API está disponível em:
 ```

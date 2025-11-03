@@ -11,25 +11,25 @@ const equipmentRoutes = require('./routes/equipment.routes');
 const maintenanceRoutes = require('./routes/maintenance.routes');
 const { authenticateToken, JWT_SECRET } = require('./middleware/auth.middleware');
 
-const path = require('path'); // <<< 1. NOVO IMPORT PARA AJUDAR COM CAMINHOS
+const path = require('path'); 
 
 const db = require('./models'); 
 const sequelize = db.sequelize;
 const { User, Equipment, Maintenance } = db;
 
 const app = express();
-<<<<<<< HEAD
-const PORT = 3000; // <<< CORRETO: A porta interna do container
-=======
+
+//const PORT = 3000; 
+
 const PORT = process.env.PORT || 8080;
->>>>>>> aa722056e48d4d339b52576f44647182c4d1bd84
+
 
 app.use(cors()); 
 app.use(express.json());
+app.use(express.static(__dirname));
 
-// 2. NOVO MIDDLEWARE ESTÁTICO PARA SERVIR O FRONTEND
-// Tenta o caminho mais simples: usa o diretório onde server.js está.
-app.use(express.static(path.resolve(__dirname))); // <<< CÓDIGO ALTERADO PARA O CAMINHO MAIS SIMPLES
+
+app.use(express.static(path.resolve(__dirname)));
 
 const swaggerDocument = YAML.load('./swagger.yaml');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
@@ -41,45 +41,38 @@ app.use('/api/users', userRoutes);
 
 
 async function startServer() {
-    try {
-        await sequelize.authenticate();
-        console.log('Conexão com o banco de dados estabelecida com sucesso.');
-        
-        await sequelize.sync({ alter: true }); 
-        console.log('Tabelas sincronizadas.');
+    try {
+        await sequelize.authenticate();
+        console.log('Conexão com o banco de dados estabelecida com sucesso.');
 
-        const [adminUser, created] = await User.findOrCreate({
-            where: { email: 'admin@faculdadetech.com' },
-            defaults: { 
-                name: 'Administrador', 
-                password: 'senha123'
-            }
-        });
+        await sequelize.sync({ alter: true }); 
+        console.log('Tabelas sincronizadas.');
 
-        if (!created) {
-            await adminUser.update({ password: 'senha123' }); 
-            console.log('Senha do Administrador resetada e criptografada (via hook).');
-        }
+        const [adminUser, created] = await User.findOrCreate({
+            where: { email: 'admin@faculdadetech.com' },
+            defaults:  { 
+            name: 'Administrador', 
+            password: 'senha123'
+            }
+        });
 
-        await Equipment.findOrCreate({
-             where: { serialNumber: 'PRJ-E-001' },
-             defaults: { name: "Projetor Epson", category: "Audiovisual", serialNumber: "PRJ-E-001", status: "disponível" }
-        });
-        
-        app.listen(PORT, () => {
-            console.log(`Servidor rodando na porta ${PORT}`);
-            console.log(`Email: admin@faculdadetech.com | Senha: senha123`);
-        });
+        if (!created) {
+            await adminUser.update({ password: 'senha123' }); 
+            console.log('Senha do Administrador resetada e criptografada (via hook).');
+        }
 
-    } catch (error) {
-        console.error('Erro ao iniciar o servidor ou conectar ao BD:', error);
-    }
+        await Equipment.findOrCreate({
+        where: { serialNumber: 'PRJ-E-001' },
+        defaults: { name: "Projetor Epson", category: "Audiovisual", serialNumber: "PRJ-E-001", status: "disponível" }
+        });
+
+        app.listen(PORT, () => {
+        console.log(`Servidor rodando na porta ${PORT}`);
+        console.log(`Email: admin@faculdadetech.com | Senha: senha123`);
+        });
+
+} catch (error) {
+ console.error('Erro ao iniciar o servidor ou conectar ao BD:', error);}
 }
 
-<<<<<<< HEAD
 startServer();
-=======
-
-startServer();
-
->>>>>>> aa722056e48d4d339b52576f44647182c4d1bd84
